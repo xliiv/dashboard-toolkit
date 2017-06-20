@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Single tile (tile-chart) dashboard</title>
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="import" href="../../dashboard-ws.html">
+  <link rel="import" href="../../tile-chart.html">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <dashboard-ws websocket-address="ws://85.255.1.138:8001">
+    <tile-chart id="tile-chart-line"></tile-chart>
+  </dashboard-ws>
+</body>
+</html>

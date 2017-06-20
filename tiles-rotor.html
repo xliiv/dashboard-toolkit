@@ -1,0 +1,61 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+
+
+<!--
+`tiles-rotor`
+Rotates tiles after given interval.
+
+@demo demo/tiles-rotor.html
+-->
+<dom-module id='tiles-rotor'>
+  <template>
+    <style>
+      iron-selector ::content > * {
+        display: none;
+      }
+      iron-selector ::content *.iron-selected {
+        display: inline-block;
+      }
+    </style>
+    <iron-selector id='selector'>
+      <content></content>
+    </iron-selector>
+  </template>
+  <script>
+    Polymer({
+      is: 'tiles-rotor',
+      properties: {
+        /*
+        * Time after flip is triggered, in milisec (1000 = 1sec.).
+        * Default is 5sec.
+        *
+        * @attribute flipTime
+        * @type Number
+        */
+        flipTime: {
+          type: Number,
+          value: 5000,
+        }
+      },
+
+      /*
+      * Selects next element and then puts itself at execution after `flipTime`
+      */
+      rotate: function() {
+        // it seems that selectNext() doesn't work
+        var nextIdx = (this.$.selector.selected + 1) % this.$.selector.children.length;
+        this.$.selector.select(nextIdx);
+        // this.$.selector.selectNext(); doesn't work, bacause it depends on
+        // iron-selector.items which is empty because of content injecting
+        this.debounce('rotate', this.rotate, this.flipTime);
+      },
+      attached: function() {
+        // set last item to flip to first item
+        this.$.selector.select(this.$.selector.children.length - 1);
+        this.rotate();
+      }
+
+    });
+  </script>
+</dom-module>

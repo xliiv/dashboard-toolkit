@@ -1,0 +1,39 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<script>
+  /** @polymerBehavior TileBehavior */
+  TileBehavior = {
+    /**
+    * Fired when `element` has `id` and is attached to DOM.
+    *
+    * @event tile-attached
+    */
+    attached: function() {
+      var tileId = this.id;
+      if (tileId) {
+        this.fire('tile-attached', {tileId: tileId});
+      }
+    },
+
+    /*
+    * Update tile's data with `tileData`.
+    *
+    * This function **MUST BE IMPLEMENTED**  by each tile
+    */
+    update: function(tileData) {
+      throw "NotImplemented";
+    },
+
+    /**
+    * Fired when `element` has `id` and is detached from DOM.
+    *
+    * @event tile-detached
+    */
+    detached: function() {
+      var tileId = this.id;
+      if (tileId) {
+        this.fire('tile-detached', {tileId: tileId});
+      }
+    }
+  };
+</script>

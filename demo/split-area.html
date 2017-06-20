@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Split-area demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../dashboard-ws.html">
+    <link rel="import" href="../split-area.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      dashboard-ws {
+        height: 360px;
+        width: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+
+      <h3>Split-area vertically demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="ws://85.255.1.138:8001">
+            <split-area kind="vertically">
+              <tile-blank style="background-color: red"></tile-blank>
+              <tile-blank style="background-color: green"></tile-blank>
+            </split-area>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Split-area horizontally demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="ws://85.255.1.138:8001">
+            <split-area kind="horizontally">
+              <tile-blank style="background-color: red"></tile-blank>
+              <tile-blank style="background-color: green"></tile-blank>
+            </split-area>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Split-area vertically with span demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws>
+            <split-area kind="vertically">
+              <tile-blank style="background-color: #12B0C5"></tile-blank>
+              <tile-blank span="2" style="background-color: #FF9618"></tile-blank>
+            </split-area>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Split-area horizontally with span demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="ws://85.255.1.138:8001">
+            <split-area kind="horizontally">
+              <tile-blank style="background-color: #12B0C5"></tile-blank>
+              <tile-blank span="2" style="background-color: #FF9618"></tile-blank>
+            </split-area>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+    </div>
+  </body>
+</html>

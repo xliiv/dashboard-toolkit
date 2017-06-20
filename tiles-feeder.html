@@ -1,0 +1,141 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`tiles-feeder` Websocket connector
+-->
+
+<dom-module id='tiles-feeder'>
+<!-- TODO: make it js lib which is a part of dashboard? -->
+<script>
+  Polymer({
+
+    is: "tiles-feeder",
+
+    properties: {
+      /*
+      * Websocket address, like `ws://localhost:8000`
+      */
+      websocketAddress: String,
+
+      /*
+      * List of tiles ids for which data should be requested
+      */
+      tilesIds: {
+        type: Array,
+        value: function() {
+          return [];
+        }
+      }
+    },
+
+    /*
+    * Request tiles' data for given `tilesIds`
+    */
+    requestTilesData: function(tilesIds) {
+      this.tilesIds = tilesIds;
+      if (this._ws.readyState === 1) {
+        this.debounce(
+          'updateTile',
+          function() {
+            this._ws.helpers.requestTilesData(this._ws, tilesIds);
+          },
+          100
+        );
+      }
+    },
+
+    _ws: null,
+
+    ready: function() {
+      this._ws = new WebSocket(this.websocketAddress);
+
+      this._ws.element = this;
+
+      this._ws.onopen = function (event) {
+        console.log('websocket:onopen', this.element.tilesIds);
+        if (this.element.tilesIds.length > 0) {
+          this.helpers.requestTilesData(this, this.element.tilesIds);
+        }
+      };
+
+      this._ws.onmessage = function(event) {
+        console.log("websocket:onmessage:" + event.data);
+        this.helpers.messageDispachter(event.data);
+      };
+
+      this._ws.onerror = function(event) {
+        console.log("websocket:onerror: " + event.data);
+      };
+
+      this._ws.onclose = function (event) {
+        console.log('websocket:onclose');
+        this._ws = null;
+      };
+
+      this._ws.helpers = {
+        requestTilesData: function(ws, tilesIds) {
+          if (typeof tilesIds === "undefined" || tilesIds.length <= 0) {
+            return
+          }
+          console.log("requestTilesData: " + tilesIds, tilesIds.length);
+          var data = {
+            kind: 'update',
+            text: JSON.stringify(tilesIds),
+          };
+          var json = JSON.stringify(data);
+          console.log('sending', json);
+          ws.send(json);
+        },
+
+        messageDispachter: function(data) {
+          // Dispatch `data` for kind "error"
+          //
+          // data = {
+          //   'kind': '["tile"|"error"]',
+          //   'text': String,
+          // }
+          var messageData = JSON.parse(data);
+          var kind = messageData['kind'];
+          if (kind === 'error') {
+            this.handleError(messageData['text']);
+          } else if (kind === 'tile') {
+            this.handleTile(JSON.parse(messageData['text']));
+          } else {
+            console.error("unknown kind: " + kind);
+          }
+        },
+
+        handleTile: function(data) {
+          // handles `data` for kind "tile"
+          //
+          // data = JSON({
+          //   'tile-id': 'chartTile',
+          //   'tile-data': '{}'
+          // })
+          var tileId = '#' + data['tile-id'];
+          var tile = document.querySelector(tileId)
+          if (tile !== null) {
+            console.log(
+                'updating: ' + tileId + ' with data:', data
+            );
+            tile.update(data['tile-data']);
+          } else {
+            console.log('No tile found: ' + tileId);
+          }
+        },
+
+        handleError: function(data) {
+          // Handles `data` for kind "error"
+          //
+          // data = String
+          console.log("error: " + data);
+        }
+      }
+    },
+
+    detached: function() {
+      this._ws = null;
+    }
+  });
+</script>
+</dom-module>

@@ -1,0 +1,87 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="chart-js-import.html">
+<link rel="import" href="tile-behaviors.html">
+<link rel="import" href="dashboard-styles.html">
+
+<!--
+`tile-chart`
+Tile displaying charts.
+
+`tile-chart` wraps [Chart.js](http://www.chartjs.org/) and reuses its
+features.
+
+To get closer look of those features, see [Chart.js docs](http://www.chartjs.org/docs/).
+
+Examples in demo are borrowed from [Chart.js docs](http://www.chartjs.org/docs/) page.
+
+### Examples:
+- http://www.chartjs.org/docs/#line-chart
+- http://www.chartjs.org/docs/#bar-chart
+- http://www.chartjs.org/docs/#radar-chart
+- http://www.chartjs.org/docs/#polar-area-chart
+- http://www.chartjs.org/docs/#doughnut-pie-chart
+- http://www.chartjs.org/docs/#bubble-chart
+
+@demo demo/tile-chart.html
+-->
+<dom-module id='tile-chart'>
+  <template>
+    <style include="dashboard-styles">
+      canvas {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <canvas id="chart"></canvas>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'tile-chart',
+      behaviors: [TileBehavior],
+
+      /*
+      * Creates chart based on `type`, `data`, `options`.
+      *
+      * See [Chart.js docs](http://www.chartjs.org/docs/) for detailed description of these attributes.
+      */
+      createChart: function(type, data, options) {
+        var ctx = this.$.chart;
+        ctx.getContext("2d");
+        var chartObj = new Chart(ctx, {
+          type: type,
+          data: data,
+          options: options,
+        });
+      },
+
+      /*
+      * Update tile's data with `tileData`
+      *
+      * `tileData` requires keys:
+      * -  `type` 
+      * -  `data`
+      * -  `options`
+      *
+      * For detailed description and data examples see [Chart.js docs](http://www.chartjs.org/docs/)
+      *
+      * Values from `type`, `data`, `options` keys are directly passed to
+      * [Chart.js](http://www.chartjs.org/docs/#getting-started-creating-a-chart)
+      *
+      */
+      update: function(tileData) {
+        // TODO: make it default but changeable by user
+        tileData['options'] = {
+          responsive: true,
+          maintainAspectRatio: false
+        };
+        this.createChart(
+            tileData['type'], tileData['data'], tileData['options']
+        );
+        //TODO:update height imperatively?
+      }
+
+    });
+  </script>
+</dom-module>

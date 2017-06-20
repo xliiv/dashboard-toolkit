@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Tile-value demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../dashboard-ws.html">
+    <link rel="import" href="../tile-value.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      dashboard-ws {
+        height: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+
+      <h3>Tile-value demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="ws://85.255.1.138:8001">
+            <tile-value id="tile-value1"></tile-value>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile-value with colors change demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="ws://85.255.1.138:8001">
+            <tile-value id="tile-value2"></tile-value>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+    </div>
+  </body>
+</html>
