@@ -3,11 +3,11 @@
 This project is inspired by Tipboard (http://allegro.tech/tipboard/)
 
 
-# \<dashboard-ws\>
+# Description
 
-Dashboard toolkit for composing dashboards
+Dashboard toolkit for composing dashboards.
 
-This is frontend for [dashboard](https://github.com/xliiv/dashboard)
+This is frontend for [Dashboard](https://github.com/xliiv/dashboard)
 
 Here's the [docs and demo](http://85.255.1.138/components/dashboard-toolkit/)
 
@@ -15,6 +15,7 @@ Here's the [docs and demo](http://85.255.1.138/components/dashboard-toolkit/)
 ### TODO:
 
 * write tests
+* update to Polymer 2
 
 
 ## Install the Polymer-CLI
