@@ -9,7 +9,7 @@ Dashboard toolkit for composing dashboards.
 
 This is frontend for [Dashboard](https://github.com/xliiv/dashboard)
 
-Here's the [docs and demo](http://85.255.1.138/components/dashboard-toolkit/)
+Here's the [docs and demo](http://85.255.1.138:9000/components/dashboard-toolkit/)
 
 
 ### TODO:
