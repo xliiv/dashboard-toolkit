@@ -1,0 +1,40 @@
+{
+  "name": "textfit-div",
+  "authors": [
+    "Roman Kaufmann <roman.kaufmann.at@gmail.com>"
+  ],
+  "keywords": [
+    "polymer",
+    "web-components",
+    "textFit"
+  ],
+  "main": "textfit-div.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "textfit": "STRML/textFit#^2.3.0",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#^1.0.5",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.3",
+    "paper-styles": "PolymerElements/paper-styles#^1.0.11",
+    "paper-card": "PolymerElements/paper-card#^1.1.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^4.0.0"
+  },
+  "homepage": "https://github.com/xliiv/textfit-div",
+  "_release": "82bc3a877b",
+  "_resolution": {
+    "type": "commit",
+    "commit": "82bc3a877bb1113ea032a41ae54b261958a64842"
+  },
+  "_source": "https://github.com/xliiv/textfit-div.git",
+  "_target": "82bc3a877bb1113ea032a41ae54b261958a64842",
+  "_originalSource": "xliiv/textfit-div"
+}

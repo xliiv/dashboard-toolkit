@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Tile-markdown demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../dashboard-ws.html">
+    <link rel="import" href="../tile-markdown.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      dashboard-ws {
+        height: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+
+      <h3>Tile with simple markdown</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-markdown id="tile-markdown-simple"></tile-markdown>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile with richer markdown</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-markdown id="tile-markdown-listing"></tile-markdown>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+    </div>
+  </body>
+</html>

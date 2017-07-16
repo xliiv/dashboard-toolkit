@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../marked-element/marked-element.html">
+<link rel="import" href="tile-behaviors.html">
+<link rel="import" href="dashboard-styles.html">
+
+
+<!--
+`tile-markdown`
+Tile rendering markdown, perfect for displaying ..
+[markdown](https://en.wikipedia.org/wiki/Markdown).
+
+@demo demo/tile-markdown.html
+-->
+<dom-module id='tile-markdown'>
+  <template>
+    <style include="dashboard-styles">
+      marked-element {
+        padding: 0.5rem 1.0rem;
+      }
+    </style>
+    <marked-element id="md" markdown="[[data]]">
+      <div class="markdown-html"></div>
+    </marked-element>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'tile-markdown',
+
+      behaviors: [TileBehavior],
+
+      /*
+      * Update tile's data with `chardata`
+      *
+      * `tileData` requries key `markdown`
+      *
+      * ### Example tileData from demo 1:
+      * ```
+      * tileData = {
+      *     "markdown": "`Markdown` is totally _awesome_!"
+      * }
+      * ```
+      * ### Example tileData from demo 2:
+      * (note: multilines below are invalid JSON)
+      * ```
+      * tileData = {
+      *   "markdown": "# Header 1
+      *   ## Header 2
+      *   ### Header 3
+      *   #### Header 4 ####
+      *   ##### Header 5 ##### 
+      *
+      *   1. Item
+      *   2. Item
+      *      * Mixed
+      *      * Mixed
+      *   3. Item
+      *   "
+      * }
+      * ```
+      */
+      update: function(tileData) {
+        this.$.md.markdown = tileData.markdown;
+      }
+    });
+  </script>
+</dom-module>

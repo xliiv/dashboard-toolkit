@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../textfit-div/textfit-div.html">
+<link rel="import" href="tile-behaviors.html">
+<link rel="import" href="dashboard-styles.html">
+
+<!--
+`tile-value`
+Tile displaying a big center value.
+
+@demo demo/tile-value.html
+-->
+<dom-module id='tile-value'>
+  <template>
+    <style include="dashboard-styles iron-flex">
+      .wrapper {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <div class="wrapper layout horizontal flex">
+      <textfit-div id="textFit" class="flex" horizontal-center vertical-center text="[[value]]"></textfit-div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'tile-value',
+      behaviors: [TileBehavior],
+
+      properties: {
+        /*
+        * Centered text
+        *
+        * @attribute value
+        * @type String
+        */
+        value: String
+      },
+
+      /*
+      * Update tile's data with `tileData`
+      *
+      * @param{object} tileData The data required by this tile 
+      *
+      * `tileData` requires key `value`
+      *
+      * ### Example tileData:
+      * tileData = {
+      *   "value": "100%"
+      * }
+      *
+      * ### Example change centered text and colors:
+      * tileData = {
+      *   "value": "50%",
+      *   "color": "yellow",
+      *   "backgroundColor": "#12B0C5"
+      * }
+      */
+      update: function(tileData) {
+        this.value = tileData.value;
+        this.$.textFit.setTextColor(tileData['color']);
+        this.$.textFit.setBackgroundColor(tileData['backgroundColor']);
+      }
+    });
+  </script>
+</dom-module>

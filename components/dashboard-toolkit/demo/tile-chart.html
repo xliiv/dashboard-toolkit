@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Tile-chart demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../dashboard-ws.html">
+    <link rel="import" href="../tile-chart.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      dashboard-ws {
+        height: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+
+      <h3>Tile-chart as line-chart demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-chart id="tile-chart-line"></tile-chart>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile-chart as bar-chart demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-chart id="tile-chart-bar"></tile-chart>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile-chart as radar-chart demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-chart id="tile-chart-radar"></tile-chart>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile-chart as polar-chart demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-chart id="tile-chart-polar"></tile-chart>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile-chart as pie-chart demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-chart id="tile-chart-pie"></tile-chart>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile-chart as doughnut-chart demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-chart id="tile-chart-doughnut"></tile-chart>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+      <h3>Tile-chart as bubble-chart demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tile-chart id="tile-chart-bubble"></tile-chart>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../font-roboto/roboto.html">
+
+<link rel="import" href="split-area.html">
+<link rel="import" href="tile-behaviors.html">
+<link rel="import" href="tile-blank.html">
+<link rel="import" href="tile-chart.html">
+<link rel="import" href="tile-image.html">
+<link rel="import" href="tile-markdown.html">
+<link rel="import" href="tile-value.html">
+<link rel="import" href="tiles-feeder.html">
+<link rel="import" href="tiles-rotor.html">
+<link rel="import" href="dashboard-styles.html">
+
+<!--
+`dashboard-ws`
+Dashboard toolkit for composing dashboards
+
+@demo demo/index.html 
+-->
+<dom-module id="dashboard-ws">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        width: 100%;
+        --dashboard-font: {
+          font-family: 'Roboto', 'Noto', sans-serif;
+          -webkit-font-smoothing: antialiased;
+        };
+        @apply(--dashboard-font);
+      }
+    </style>
+    <tiles-feeder id="feeder" websocket-address='{{websocketAddress}}'></tiles-feeder>
+    <content select="*"></content>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'dashboard-ws',
+
+      observers: [
+        '_notifyFeeder(tilesIds.splices)'
+      ],
+      listeners: {
+        'tile-attached': '_registerTile',
+        'tile-deattached': '_unregisterTile',
+      },
+
+      _registerTile: function(e, detail) {
+        if (this.tilesIds.indexOf(detail.tileId) == -1) {
+          this.push("tilesIds", detail.tileId);
+          this.notifyPath("tilesIds");
+        }
+      },
+
+      _unregisterTile: function(e, detail) {
+        var index = this.tilesIds.indexOf(detail.tileId);
+        if (index > -1) {
+              this.splice("tilesIds", index, 1);
+        }
+      },
+
+      _notifyFeeder: function(changedRecord) {
+        if (typeof changedRecord === "undefined") {
+          return
+        }
+        var tilesIds = changedRecord.indexSplices[0].object;
+        this.$.feeder.requestTilesData(tilesIds);
+      },
+
+      properties: {
+        /*
+        * Websocket address, like `ws://localhost:8001`
+        */
+        websocketAddress: {
+          type: String,
+          value: "ws://localhost:8001",
+        },
+        /*
+        * List of tiles ids for which data should be requested
+        */
+        tilesIds: {
+          type: Array,
+          value: function() {
+              return [];
+          }
+        },
+      },
+
+    });
+  </script>
+</dom-module>

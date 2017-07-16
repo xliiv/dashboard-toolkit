@@ -1,0 +1,61 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="tile-behaviors.html">
+<link rel="import" href="dashboard-styles.html">
+
+<!--
+`tile-image`
+Tile displaying image/gif.
+
+@demo demo/tile-image.html
+-->
+<dom-module id='tile-image'>
+  <template>
+    <style include="dashboard-styles iron-flex">
+      div {
+        min-height: 100%;
+        min-width: 100%;
+        /*
+        Any aribitrary value which eventually will be replaced by dashboard
+        mechanics, so .. .o.
+        */
+        height: 100px;
+      }
+      div > div {
+        height: 100%;
+      }
+      #img {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <div class="horizontal layout center-justified">
+      <div class="horizontal layout center">
+        <iron-image id='img' preload fade></iron-image>
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'tile-image',
+
+      behaviors: [TileBehavior],
+
+      /*
+      * Update tile's data with `tileData`
+      *
+      * `tileData` requires key `imageSrc`
+      *
+      * ### Example data from demo 1:
+      * tileData = {
+      *     "imageSrc": "https://media.giphy.com/media/D8UYWEpnUpJ4Y/giphy.gif"
+      * }
+      */
+      update: function(tileData) {
+        this.$.img.setAttribute('src', tileData['imageSrc']);
+      }
+    });
+  </script>
+</dom-module>

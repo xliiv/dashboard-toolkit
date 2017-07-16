@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Tiles-rotor demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../dashboard-ws.html">
+    <link rel="import" href="../tile-blank.html">
+    <link rel="import" href="../tiles-rotor.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+      dashboard-ws {
+        height: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+
+      <h3>Rotates two `tile-blank` tiles demo</h3>
+      <demo-snippet>
+        <template>
+          <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+            <tiles-rotor flip-time="2000">
+              <tile-blank style="background-color: #12B0C5"></tile-blank>
+              <tile-blank style="background-color: #FF9618"></tile-blank>
+            </tiles-rotor>
+          </dashboard-ws>
+        </template>
+      </demo-snippet>
+
+    </div>
+  </body>
+</html>

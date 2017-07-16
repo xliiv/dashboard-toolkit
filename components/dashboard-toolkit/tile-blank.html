@@ -1,0 +1,31 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="tile-behaviors.html">
+<link rel="import" href="dashboard-styles.html">
+
+<!--
+`tile-blank`
+Blank tile perfect for space filling in dashboards.
+It can be useful to get boilerplate for creating new tiles.
+
+@demo demo/tile-blank.html 
+-->
+
+<dom-module id='tile-blank'>
+  <template>
+    <style include="dashboard-styles">
+    </style>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'tile-blank',
+
+      behaviors: [TileBehavior],
+
+      update(tileData) {
+        // skip tile-empty has no logic for update
+        ;
+      }
+    });
+  </script>
+</dom-module>

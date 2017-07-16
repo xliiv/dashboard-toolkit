@@ -1,0 +1,66 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="dashboard-styles.html">
+
+<!--
+`split-area`
+Splits area, helpful when tiles needs to be placed in rows or columns.
+
+@demo demo/split-area.html
+-->
+<dom-module id='split-area'>
+  <template>
+    <style include="dashboard-styles">
+      :host ::content > * {
+        float: left;
+      }
+    </style>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'split-area',
+      properties: {
+        /*
+        * Kind of split, two options: `vertically`, `horizontally`
+        * @attribute kind
+        * @type String
+        */
+        kind: String
+      },
+
+      _getSpan: function(item) {
+        return parseInt(item.getAttribute("span") || 1);
+      },
+
+      _countSpans: function(children) {
+        var allSpans = 0;
+        for (var i = 0; i < children.length; i++) {
+          allSpans += this._getSpan(children[i]);
+        }
+        return allSpans;
+      },
+
+      _getDimension: function() {
+        var dimension = "";
+        if (this.kind === "horizontally") {
+          var dimension = "height";
+        } else if (this.kind === "vertically") {
+          var dimension = "width";
+        } else {
+          throw "value of property 'kind' is neither 'horizontally' or 'vertically': " + this.kind;
+        }
+        return dimension;
+      },
+
+      attached: function() {
+        var children = Polymer.dom(this).children;
+        var allSpans = this._countSpans(children);
+        for (var i = 0; i < children.length; i++) {
+          var span = this._getSpan(children[i]);
+          children[i].style[this._getDimension()] = (100/allSpans * span) + '%';
+        }
+      }
+    });
+  </script>
+</dom-module>

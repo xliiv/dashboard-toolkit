@@ -1,0 +1,87 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<link rel="import" href="dashboard-styles.html">
+
+
+<!--
+`tiles-rotor`
+Rotates tiles after given interval.
+
+@demo demo/tiles-rotor.html
+-->
+<dom-module id='tiles-rotor'>
+  <template>
+    <style include="dashboard-styles">
+       :host {
+        width: 100%;
+        height: 100%;
+      }
+
+      iron-selector {
+        height: 100%;
+        width: 100%;
+        min-height: 100%;
+        display: block;
+        position: relative;
+      }
+
+      iron-selector ::content>* {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      iron-selector ::content *.iron-selected {
+        z-index: 1;
+      }
+    </style>
+    <iron-selector id='selector'>
+      <content></content>
+    </iron-selector>
+  </template>
+  <script>
+    Polymer({
+      is: 'tiles-rotor',
+      properties: {
+        /*
+        * Time after flip is triggered, in milisec (1000 = 1sec.).
+        * Default is 5sec.
+        *
+        * @attribute flipTime
+        * @type Number
+        */
+        flipTime: {
+          type: Number,
+          value: 5000,
+        }
+      },
+
+      /*
+      * Does single rotation
+      */
+      singleRotation: function () {
+        // it seems that selectNext() doesn't work
+        var nextIdx = (this.$.selector.selected + 1) % this.$.selector.children.length;
+        // this.$.selector.selectNext(); doesn't work, bacause it depends on
+        // iron-selector.items which is empty because of content injecting
+        this.$.selector.select(nextIdx);
+      },
+
+      /*
+      * Keeps executing `singleRotation` on each `flipTime`
+      */
+      rotate: function () {
+        this.singleRotation();
+        this.debounce('rotate', this.rotate, this.flipTime);
+      },
+
+      attached: function () {
+        // set last item to flip to first item
+        this.$.selector.select(this.$.selector.children.length - 1);
+        this.rotate();
+      }
+
+    });
+  </script>
+</dom-module>

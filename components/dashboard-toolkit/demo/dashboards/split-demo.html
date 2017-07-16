@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Advanced split dashboard</title>
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="import" href="../../dashboard-ws.html">
+  <link rel="import" href="../../tile-blank.html">
+  <link rel="import" href="../../tile-chart.html">
+  <link rel="import" href="../../tile-image.html">
+  <link rel="import" href="../../tile-markdown.html">
+  <link rel="import" href="../../tile-value.html">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <dashboard-ws websocket-address="wss://d45hb04rd.space:8002/demo">
+    <split-area kind="vertically">
+      <tile-chart id="tile-chart-bar"></tile-chart>
+
+      <split-area kind="horizontally">
+        <tile-chart id="tile-chart-line"></tile-chart>
+
+        <split-area kind="vertically">
+
+          <tiles-rotor flip-time="2000">
+            <tile-markdown id="tile-markdown-simple"></tile-markdown>
+            <tile-markdown id="tile-markdown-listing"></tile-markdown>
+          </tiles-rotor>
+
+          <tiles-rotor>
+            <tile-value id="tile-value1"></tile-value>
+            <tile-value id="tile-value2"></tile-value>
+          </tiles-rotor>
+
+        </split-area>
+      </split-area>
+
+    </split-area>
+  </dashboard-ws>
+</body>
+</html>
