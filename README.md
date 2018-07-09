@@ -9,9 +9,6 @@ Dashboard toolkit for composing dashboards.
 
 This is frontend for [Dashboard](https://github.com/xliiv/dashboard)
 
-Here's the [docs and demo](https://docs.d45hb04rd.space/components/dashboard-toolkit/)
-
-
 ### TODO:
 
 * write tests
